@@ -54,6 +54,24 @@ async function initGallery() {
     }
 };
 
+// Getting categories via the API
+fetch("http://localhost:5678/api/categories")
+  .then(response => {
+// Checks if the server response is successful
+    if (!response.ok) {
+// If the response is not successful, throws an error
+      throw new Error('Network response was not ok');
+    }
+    return response.json();
+  })
+  .then(data => {
+    console.log(data);
+  })
+  .catch(error => {
+    console.error('There was a problem with the fetch operation:', error);
+  });
 
+// Filters
 
 initGallery(); // Initialize the gallery
+
