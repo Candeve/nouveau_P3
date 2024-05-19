@@ -43,7 +43,7 @@ function createGallery(works) {
 }
 
 // Create filter buttons
-function createFilters() {
+function createFilters(categoriesNames) {
   const divElementButtons = document.querySelector(".filters");
 
   // Clear existing content of the filters buttons container
@@ -55,53 +55,63 @@ function createFilters() {
   buttonElementAll.innerText = "Tous";
   divElementButtons.appendChild(buttonElementAll);
 
+  // Create a Set to store unique category names
+  const uniqueCategories = new Set(categoriesNames);
+
   // Define the category names
-  const categoriesNames = ["Objets", "Appartements", "Hotels & Restaurants"];
-  for (let i = 0; i < categoriesNames.length; i++) {
-    const categoryName = categoriesNames[i];
+  uniqueCategories.forEach(categoryName => {
     const buttonElement = document.createElement("button");
     buttonElement.classList.add("button_categories");
     buttonElement.value = categoryName; // Set the button value as the category name
-    buttonElement.dataset.id = i
     buttonElement.innerText = categoryName; // Set the button text as the category name
     divElementButtons.appendChild(buttonElement);
-  }
+  });
 }
 
 // Manage filters
-function manageFilters(works) {
+async function manageFilters(works, categoriesNames) {
   const displayAll = document.querySelector(".button_all_categories");
-  displayAll.addEventListener("click", (event) => {
-    event.preventDefault(); // Prevent page refresh
+  displayAll.addEventListener("click", () => {
     document.querySelector(".gallery").innerHTML = "";
     createGallery(works);
   });
 
-  const button_categories = document.querySelectorAll(".button_categories");
-  button_categories.forEach(button => {
-    button.addEventListener("click", (event) => {
-      event.preventDefault(); // Prevent page refresh
-      const buttonCategoryOnClick = event.target.value.trim(); // Remove unnecessary spaces
-      console.log("Catégorie sélectionnée :", buttonCategoryOnClick);
+  const divElementButtons = document.querySelector(".filters");
+  divElementButtons.addEventListener("click", async (event) => {
+    if (event.target.classList.contains("button_categories")) {
+      const categoryName = event.target.value.trim().toLowerCase();
+      console.log("Catégorie sélectionnée :", categoryName);
 
-      // Use case-insensitive comparison for category names
-      const choosenCategory = works.filter(work => work.category.name.trim().toLowerCase() === buttonCategoryOnClick.toLowerCase());
+      let choosenCategory;
+      if (categoryName === "tous") {
+        choosenCategory = works; // Show all works if "Tous" button is clicked
+      } else {
+        // Filter works based on category name
+        choosenCategory = works.filter(work => work.category.name.trim().toLowerCase() === categoryName);
+      }
+      
       console.log("Projets de la catégorie sélectionnée :", choosenCategory);
 
       document.querySelector(".gallery").innerHTML = ""; // Clear the gallery
       createGallery(choosenCategory); // Create the gallery with filtered data
-    });
+    }
   });
 }
+
+
 
 // Initialize the gallery
 async function initGallery() {
   const worksData = await fetchData(); // Wait for the data to be fetched
   if (worksData) {
+    // Extract category names from works data
+    const categoriesNames = worksData.map(work => work.category.name);
+
     createGallery(worksData); // Create the gallery with the fetched data
-    createFilters(); // Create the filter buttons
-    manageFilters(worksData); // Manage the filters
+    createFilters(categoriesNames); // Create the filter buttons
+    manageFilters(worksData, categoriesNames); // Manage the filters
   }
 }
 
+// Initialize the gallery
 initGallery(); // Initialize the gallery

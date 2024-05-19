@@ -9,17 +9,17 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	<!--liaison de mon fichier js à mon html-->
-	<script src="works.js" defer></script>
+	<!--liaison de mes fichiers js à mon html-->
+
 </head>
 <body>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
-			<li>contact</li>
-			<li>login</li>
+			<li><a href="#portfolio">Projets</a></li>
+			<li><a href="#contact">Contact</a></li>
+			<li><a href="login.html">Login</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -40,9 +40,10 @@
 		<h2>Mes Projets</h2>
 
 		<!--filters-->
-		<div class="filters">
+		<div class="filters"><!--Dynamic display via JS--></div>
+		<!--filters-->
 
-		</div>
+		
 
 		
 		<div class="gallery"><!--Dynamic display via JS--></div>
@@ -70,5 +71,7 @@
 		</ul>
 	</nav>
 </footer>
+	<script src="works.js"></script>
+	
 </body>
 </html>
