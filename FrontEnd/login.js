@@ -1,6 +1,6 @@
 const formLogin = document.querySelector("form");
 
-//'un écouteur d'événement pour le formulaire lors de sa soumission
+// Ajoute un écouteur d'événement pour le formulaire lors de sa soumission
 formLogin.addEventListener("submit", (e) => { 
     e.preventDefault(); // Empêche le comportement par défaut du formulaire (rechargement de la page)
     login();
@@ -26,12 +26,18 @@ async function login() {
             },
             body: JSON.stringify(user),
         });
-         // Vérification de la réponse du serveur
+
+        // Vérification de la réponse du serveur
         if (response.ok) {
             const data = await response.json();
             const userdata = data.token;
-             // Stockage du token dans le stockage de session du navigateur
-            sessionStorage.setItem('token', userdata); 
+
+            // Stockage du token dans le stockage de session du navigateur
+            sessionStorage.setItem('token', userdata);
+            
+            // Ajout du console.log pour vérifier le stockage du token
+            console.log('Token stocké dans sessionStorage:', sessionStorage.getItem('token'));
+
             document.location.href = "index.html"; // Redirection vers la page d'accueil
 
         } else {

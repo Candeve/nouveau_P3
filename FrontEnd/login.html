@@ -9,44 +9,42 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
-	
 </head>
-
 <body>
-    <header>
-        <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Projets</a></li>
-			    <li><a href="index.html">Contact</a></li>
-			    <li><a id="login_bold" href="#login">Login</a></li>
-                <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-            </ul>
-        </nav>
-    </header>
+<header>
+	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+	<nav>
+		<ul>
+			<li><a href="index.html">Projets</a></li>
+			<li><a href="index.html">Contact</a></li>
+			<li><a id="login_bold" href="#login">Login</a></li>
+			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+		</ul>
+	</nav>
+</header>
 <main>
     <section id="login">
 		<h2>Log in</h2>
 		<form id ="form_login" action="#" method="post">
             <span class="error" id="error-message"></span>
 			<label for="email">E-mail</label>
-			<input type="email" name="email" id="email"required>
+			<input type="email" name="email" id="email" required>
 			<label for="password">Mot de passe</label>
 			<input type="password" name="password" id="password" required>
 			<button class="button_for_login" type="submit">Se connecter</button>
             <div class="password_forgotten"><p>Mot de passe oublié</p></div>
 		</form>
-        
 	</section>
 </main>
     
-    <footer>
-        <nav>
-            <ul>
-                <li>Mentions Légales</li>
-            </ul>
-        </nav>
-    </footer>
-    <script type="module" src="login.js"></script>
+<footer>
+    <nav>
+        <ul>
+            <li>Mentions Légales</li>
+        </ul>
+    </nav>
+</footer>
+<script type="module" src="login.js"></script>
+<script src="modale.js"></script>
 </body>
 </html>
