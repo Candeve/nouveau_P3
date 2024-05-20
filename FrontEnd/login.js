@@ -32,11 +32,11 @@ async function login() {
             const data = await response.json();
             const userdata = data.token;
 
-            // Stockage du token dans le stockage de session du navigateur
-            sessionStorage.setItem('token', userdata);
+            // Stockage du token dans le local storage du navigateur
+            localStorage.setItem('token', userdata);
             
             // Ajout du console.log pour vérifier le stockage du token
-            console.log('Token stocké dans sessionStorage:', sessionStorage.getItem('token'));
+            console.log('Token stocké dans localStorage:', localStorage.getItem('token'));
 
             document.location.href = "index.html"; // Redirection vers la page d'accueil
 

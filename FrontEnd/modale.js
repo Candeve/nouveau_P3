@@ -1,11 +1,9 @@
-// modale.js
-
 document.addEventListener("DOMContentLoaded", () => {
     updateLoginButton();
 });
 
 function updateLoginButton() {
-    const token = sessionStorage.getItem('token');
+    const token = localStorage.getItem('token');
     const loginButton = document.querySelector('#login_bold');
     
     if (token) {
@@ -19,8 +17,17 @@ function updateLoginButton() {
     }
 }
 
-function logout() {
-    sessionStorage.removeItem('token');
+function logout(event) {
+    event.preventDefault();  // Empêche le comportement par défaut du lien
+    console.log("Logout initiated");  // Ajoutez ce log pour vérifier que la fonction est appelée
+
+    localStorage.removeItem('token');
+    console.log("Token removed from localStorage");  // Vérifiez que le token est bien supprimé
+
     updateLoginButton();
-    document.location.href = "index.html";
+
+    // Utilisez setTimeout pour éviter un éventuel problème de redirection trop rapide
+    setTimeout(() => {
+        document.location.href = "index.html";
+    }, 100);  // Un délai court pour s'assurer que tout est bien pris en compte avant la redirection
 }
