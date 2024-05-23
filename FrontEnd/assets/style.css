@@ -320,6 +320,8 @@ nav ul li a {
     width: 100%;
     z-index: 1000;
 	left: 0;
+	font-family: "Work Sans";
+	font-size: 12px;
 }
 
 #portfolio {
@@ -327,14 +329,30 @@ nav ul li a {
 }
 
 #edit-button {
-    margin-left: 10px;
-    background-color: #4CAF50;
-    color: white;
+    background: none;
     border: none;
-    padding: 5px 10px;
+    color: black;
+    font-size: 13px;
     cursor: pointer;
-    border-radius: 3px;
+    display: flex;
+    align-items: center;
+	padding-left: 20px;
+	font-family: "Work Sans";
 }
+
+#edit-button i {
+    margin-right: 5px; /* Espace entre l'icône et le texte */
+}
+
+
+.title-container {
+	display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    justify-content: center;
+}
+
+
 
 .modal {
     display: none;
@@ -370,5 +388,6 @@ nav ul li a {
     text-decoration: none;
     cursor: pointer;
 }
+
 
   
