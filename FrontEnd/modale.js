@@ -40,6 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
     span.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
+        resetPhotoUploadContainer();
         modal.style.display = "none";
         localStorage.setItem('modalOpen', 'false');
     });
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === modal) {
             event.preventDefault();
             event.stopPropagation();
+            resetPhotoUploadContainer();
             modal.style.display = "none";
             localStorage.setItem('modalOpen', 'false');
         }
@@ -66,8 +68,22 @@ document.addEventListener("DOMContentLoaded", () => {
     backToGalleryButton.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
+        resetPhotoUploadContainer();
         galleryView.style.display = "block";
         addPhotoView.style.display = "none";
+    });
+
+    const photoUploadContainer = document.getElementById("photo-upload-container");
+    const photoFileInput = document.getElementById("photo-file");
+
+    photoUploadContainer.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        photoFileInput.click();
+    });
+
+    photoFileInput.addEventListener("change", (event) => {
+        displaySelectedImage(event);
     });
 
     const addPhotoForm = document.getElementById("add-photo-form");
@@ -173,7 +189,7 @@ async function populateModalGallery() {
             imageElement.src = project.imageUrl;
 
             const deleteIcon = document.createElement("i");
-            deleteIcon.classList.add("fa-solid", "fa-trash", "delete-icon");
+            deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon"); // Updated icon class
 
             deleteIcon.addEventListener("click", async (event) => {
                 event.preventDefault();
@@ -243,6 +259,7 @@ async function handleAddPhoto() {
 
         document.getElementById("gallery-view").style.display = "block";
         document.getElementById("add-photo-view").style.display = "none";
+        resetPhotoUploadContainer();
     } catch (error) {
         console.error('Erreur pendant la requête d\'ajout :', error);
     }
@@ -258,7 +275,7 @@ function addPhotoToGallery(work, gallerySelector) {
     imageElement.src = work.imageUrl;
 
     const deleteIcon = document.createElement("i");
-    deleteIcon.classList.add("fa-solid", "fa-trash", "delete-icon");
+    deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon"); // Updated icon class
 
     deleteIcon.addEventListener("click", async (event) => {
         event.preventDefault();
@@ -286,4 +303,32 @@ function removePhotoFromMainGallery(id) {
             break;
         }
     }
+}
+
+function displaySelectedImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const imgElement = document.createElement("img");
+            imgElement.src = e.target.result;
+            imgElement.classList.add("uploaded-photo");
+
+            const photoUploadContainer = document.getElementById("photo-upload-container");
+            photoUploadContainer.innerHTML = "";
+            photoUploadContainer.appendChild(imgElement);
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+function resetPhotoUploadContainer() {
+    const photoUploadContainer = document.getElementById("photo-upload-container");
+    photoUploadContainer.innerHTML = `
+        <i class="fa-regular fa-image"></i>
+        <p>+ Ajouter photo</p>
+        <p>jpg, png : 4mo max.</p>
+    `;
+    const photoFileInput = document.getElementById("photo-file");
+    photoFileInput.value = ""; // Reset the file input value
 }

@@ -79,10 +79,9 @@ h1 > span {
 }
 
 h2{
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 30px;
-	color: #1D6154
+    font-family: Work Sans;
+	font-size: 25px;
+    margin-top: 25px;
 }
 nav ul {
 	display: flex;
@@ -183,7 +182,7 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	margin: 2em;
 }
 
 /* background-color */
@@ -361,10 +360,10 @@ nav ul li a {
     left: 0;
     top: 0;
     width: 100%;
-    height: 100%;
-    overflow: auto;
+
     background-color: rgb(0,0,0);
     background-color: rgba(0,0,0,0.4);
+    bottom: 0;
 }
 
 .modal-content {
@@ -372,11 +371,25 @@ nav ul li a {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 500px; /* Largeur fixe */
+    height: 650px; /* Hauteur fixe */
+    align-content: stretch;
+    border-radius: 10px;
+    position: relative;
+    bottom: 150px;
+    
 }
 
+#gallery-view, #add-photo-view {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden; /* Enlève la barre de défilement pour la première vue */
+}
+
+
 .close {
-    color: #aaa;
+    color: black;
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -391,19 +404,26 @@ nav ul li a {
 
 .add-photo-button {
     display: block;
-    margin: 20px auto;
     padding: 10px 20px;
-    background-color: #4CAF50;
-    color: white;
+    height: 50px;
+    font-size: 1.2em;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
+    font-family: 'Syne';
+    color: white;
+    background-color: #1D6154;
+    margin: 2em auto;
+    text-align: center;
+    border-radius: 60px;
+    cursor: pointer; /* Ajoute un curseur de type pointer */
+    transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out;
 }
 
-.add-photo-button:hover {
-    background-color: #45a049;
+.add-photo-button:active {
+    transform: scale(0.95); /* Réduit légèrement la taille pour indiquer le clic */
+    background-color: #14543c; /* Assombrit légèrement la couleur de fond */
 }
+
+
 
 .figure-modal {
     position: relative;
@@ -413,14 +433,19 @@ nav ul li a {
 
 .figure-modal img {
     display: block;
+    width: 100px;
 }
 
 .delete-icon {
     position: absolute;
     top: 10px;
     right: 10px;
-    color: red;
+    color: white;
     cursor: pointer;
+    background-color: black;
+    padding: 5px;
+    border-radius: 5px;
+
 }
 
 #add-photo-form {
@@ -450,6 +475,10 @@ nav ul li a {
     font-size: 16px;
 }
 
+#add-photo-form button{
+    margin-top: 60px;
+}
+
 .submit-photo-button:hover {
     background-color: #45a049;
 }
@@ -458,4 +487,48 @@ nav ul li a {
     font-size: 24px;
     cursor: pointer;
     margin-bottom: 20px;
+}
+
+.modal-gallery-container {
+    flex-grow: 1;
+
+}
+
+.photo-upload-container {
+    cursor: pointer;
+    text-align: center;
+
+    background-color: #E8F1F6;
+    border-radius: 8px;
+    height: 150px; /* Ajustez selon vos besoins */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.photo-upload-container i {
+    font-size: 50px;
+    color: #B9C5CC; /* Bleu de l'icône */
+}
+.photo-upload-container p {
+    margin: 10px 0;
+    color: #B9C5CC;
+    font-weight: bold;
+}
+
+
+/* Exemple de style spécifique pour les images téléchargées dans le rectangle bleu */
+.uploaded-photo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+#add-photo-form input, #add-photo-form select, #add-photo-form button{
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.1); /* Ombrage léger */
+    border: none;
+}
+
+#police-color {
+color:#306685;
 }
