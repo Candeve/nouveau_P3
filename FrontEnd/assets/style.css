@@ -372,16 +372,13 @@ nav ul li a {
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 500px; /* Largeur fixe */
-    height: 650px; /* Hauteur fixe */
+    width: 630px; /* Largeur fixe */
+    height: 688px; /* Hauteur fixe */
     align-content: stretch;
     border-radius: 10px;
-    position: relative;
     bottom: 150px;
-    padding-left:30px
-
-
-    
+    padding-left:30px;
+    position: relative;
 }
 
 #gallery-view, #add-photo-view {
@@ -515,6 +512,8 @@ nav ul li a {
     justify-content: center;
     align-items: center;
 }
+
+
 .photo-upload-container i {
     font-size: 50px;
     color: #B9C5CC; /* Bleu de l'icône */
@@ -539,7 +538,16 @@ nav ul li a {
 }
 
 #police-color {
-    color:#306685;
+    color: #306685;
+    display: block;
+    height: 40px;
+    background-color: #CBD6DC;
+    border-radius: 60px;
+    cursor: pointer;
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 
@@ -548,7 +556,7 @@ nav ul li a {
     font-family: 'Work Sans', sans-serif;
 }
 
-.photo-category {
+#photo-category {
     color: #333; /* Noir clair */
     font-family: 'Work Sans', sans-serif;
 }
@@ -566,4 +574,34 @@ nav ul li a {
     font-weight: bold;
     margin-bottom: 5px;
     font-size: 14px;
+}
+
+.separator1 {
+    width: 80%; /* Ajustez cette valeur selon vos besoins */
+    height: 1px;
+    background-color: #B9C5CC; /* Couleur grise */
+    margin: 20px auto; /* Espace au-dessus et au-dessous de la barre */
+}
+
+.separator2 {
+    width: 80%; /* Ajustez cette valeur selon vos besoins */
+    height: 1px;
+    background-color: #B9C5CC; /* Couleur grise */
+    margin: 20px auto; /* Espace au-dessus et au-dessous de la barre */
+    margin-top: 85px;
+}
+
+footer {
+    background-color: white;
+    color: black;
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 5em;
+}
+
+
+.photo-upload-container p {
+    color: #444444;
 }

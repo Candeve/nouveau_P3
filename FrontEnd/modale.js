@@ -27,6 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         galleryView.style.display = "block";
         addPhotoView.style.display = "none";
         await populateModalGallery();
+        addSeparatorAfterImages();
     });
 
     span.addEventListener("click", (event) => {
@@ -52,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
         galleryView.style.display = "none";
         addPhotoView.style.display = "block";
         await populateCategoryOptions();
+        addSeparatorAfterCategory();
     });
 
     const backToGalleryButton = document.getElementById("back-to-gallery");
@@ -244,8 +246,8 @@ async function handleAddPhoto() {
         const newWork = await response.json();
         console.log(newWork);
 
-        addPhotoToGallery(newWork, '.modal-gallery');
-        addPhotoToGallery(newWork, '.gallery');
+        addPhotoToModalGallery(newWork);
+        addPhotoToMainGallery(newWork);
 
         document.getElementById("gallery-view").style.display = "block";
         document.getElementById("add-photo-view").style.display = "none";
@@ -255,8 +257,8 @@ async function handleAddPhoto() {
     }
 }
 
-function addPhotoToGallery(work, gallerySelector) {
-    const galleryElement = document.querySelector(gallerySelector);
+function addPhotoToModalGallery(work) {
+    const modalGalleryElement = document.querySelector('.modal-gallery');
     const figureElement = document.createElement("figure");
     figureElement.classList.add("figure-modal");
     figureElement.dataset.id = work.id;
@@ -273,15 +275,29 @@ function addPhotoToGallery(work, gallerySelector) {
         const success = await deleteWork(work.id);
         if (success) {
             figureElement.remove();
-            if (gallerySelector === '.modal-gallery') {
-                removePhotoFromMainGallery(work.id);
-            }
+            removePhotoFromMainGallery(work.id);
         }
     });
 
     figureElement.appendChild(imageElement);
     figureElement.appendChild(deleteIcon);
-    galleryElement.appendChild(figureElement);
+    modalGalleryElement.appendChild(figureElement);
+}
+
+function addPhotoToMainGallery(work) {
+    const mainGalleryElement = document.querySelector('.gallery');
+    const figureElement = document.createElement("figure");
+    figureElement.dataset.id = work.id;
+
+    const imageElement = document.createElement("img");
+    imageElement.src = work.imageUrl;
+
+    const titleElement = document.createElement("figcaption");
+    titleElement.textContent = work.title;
+
+    figureElement.appendChild(imageElement);
+    figureElement.appendChild(titleElement);
+    mainGalleryElement.appendChild(figureElement);
 }
 
 function removePhotoFromMainGallery(id) {
@@ -316,9 +332,36 @@ function resetPhotoUploadContainer() {
     const photoUploadContainer = document.getElementById("photo-upload-container");
     photoUploadContainer.innerHTML = `
         <i class="fa-regular fa-image"></i>
-        <p>+ Ajouter photo</p>
+        <p id="police-color">+ Ajouter photo</p>
         <p>jpg, png : 4mo max.</p>
     `;
     const photoFileInput = document.getElementById("photo-file");
     photoFileInput.value = ""; // Reset the file input value
+}
+
+// Ajoutez cette fonction pour créer une barre de séparation avec une classe spécifique
+function createSeparator(className) {
+    const separator = document.createElement('div');
+    separator.classList.add(className);
+    return separator;
+}
+
+// Ajoutez des barres de séparation après les images de la modale
+function addSeparatorAfterImages() {
+    const modalGalleryElement = document.querySelector('.modal-gallery');
+    const existingSeparator = modalGalleryElement.parentNode.querySelector('.separator1');
+    if (!existingSeparator) {
+        const separator = createSeparator('separator1');
+        modalGalleryElement.parentNode.insertBefore(separator, modalGalleryElement.nextSibling);
+    }
+}
+
+// Ajoutez des barres de séparation après la catégorie dans le formulaire
+function addSeparatorAfterCategory() {
+    const categorySelect = document.getElementById("photo-category");
+    const existingSeparator = categorySelect.parentNode.querySelector('.separator2');
+    if (!existingSeparator) {
+        const separator = createSeparator('separator2');
+        categorySelect.parentNode.insertBefore(separator, categorySelect.nextSibling);
+    }
 }
