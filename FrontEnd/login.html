@@ -1,50 +1,50 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-	<meta charset="UTF-8">
-	<title>Sophie Bluel - Architecte d'intérieur</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-	<meta name="description" content="">
-	<link rel="stylesheet" href="./assets/style.css">
+    <meta charset="UTF-8"> <!-- Définit l'encodage des caractères à UTF-8 -->
+    <title>Sophie Bluel - Architecte d'intérieur</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptation de la page aux différentes tailles d'écran -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Préconnexion aux serveurs de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Préconnexion aux serveurs de Google Fonts avec gestion du cross-origin -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet"> <!-- Lien vers les polices utilisées sur la page -->
+    <meta name="description" content=""> <!-- Description de la page pour les moteurs de recherche (SEO) -->
+    <link rel="stylesheet" href="./assets/style.css"> <!-- Lien vers la feuille de style CSS locale -->
 </head>
 <body>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
-	<nav>
-		<ul>
-			<li><a href="index.html">Projets</a></li>
-			<li><a href="index.html">Contact</a></li>
-			<li><a id="login_bold" href="#login">Login</a></li>
-			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
-		</ul>
-	</nav>
+    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1> <!-- Titre principal de la page -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Projets</a></li> <!-- Lien vers la page d'accueil (section Projets) -->
+            <li><a href="index.html">Contact</a></li> <!-- Lien vers la page d'accueil (section Contact) -->
+            <li><a id="login_bold" href="#login">Login</a></li> <!-- Lien vers la section de connexion -->
+            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li> <!-- Icône Instagram -->
+        </ul>
+    </nav>
 </header>
 <main>
     <section id="login">
-		<h2>Log in</h2>
-		<form id="form_login" action="#" method="post">
-			<label for="email">E-mail</label>
-			<input type="email" name="email" id="email" required>
-			<label for="password">Mot de passe</label>
-			<input type="password" name="password" id="password" required>
-            <span class="error" id="error-message"></span>
-			<button class="button_for_login" type="submit">Se connecter</button>
-            <div class="password_forgotten"><p>Mot de passe oublié</p></div>
-		</form>
-	</section>
+        <h2>Log in</h2> <!-- Titre de la section de connexion -->
+        <form id="form_login" action="#" method="post">
+            <label for="email">E-mail</label> <!-- Étiquette pour le champ de l'email -->
+            <input type="email" name="email" id="email" required> <!-- Champ pour l'email (obligatoire) -->
+            <label for="password">Mot de passe</label> <!-- Étiquette pour le champ du mot de passe -->
+            <input type="password" name="password" id="password" required> <!-- Champ pour le mot de passe (obligatoire) -->
+            <span class="error" id="error-message"></span> <!-- Élément pour afficher les messages d'erreur -->
+            <button class="button_for_login" type="submit">Se connecter</button> <!-- Bouton pour soumettre le formulaire de connexion -->
+            <div class="password_forgotten"><p>Mot de passe oublié</p></div> <!-- Lien pour le mot de passe oublié -->
+        </form>
+    </section>
 </main>
     
 <footer>
     <nav>
         <ul>
-            <li>Mentions Légales</li>
+            <li>Mentions Légales</li> <!-- Lien vers les mentions légales -->
         </ul>
     </nav>
 </footer>
-<script type="module" src="login.js"></script>
-<script src="modale.js"></script>
+<script type="module" src="login.js"></script> <!-- Inclusion du fichier JavaScript login.js (en tant que module) -->
+<script src="modale.js"></script> <!-- Inclusion du fichier JavaScript modale.js -->
 </body>
 </html>

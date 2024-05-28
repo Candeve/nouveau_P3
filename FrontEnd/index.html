@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Sophie Bluel - Architecte d'intérieur</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
-    <meta name="description" content="">
-    <link rel="stylesheet" href="./assets/style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta charset="UTF-8"> <!-- Définit l'encodage des caractères à UTF-8 -->
+    <title>Sophie Bluel - Architecte d'intérieur</title> <!-- Titre de la page affiché dans l'onglet du navigateur -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Adaptation de la page aux différentes tailles d'écran -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Préconnexion aux serveurs de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Préconnexion aux serveurs de Google Fonts avec gestion du cross-origin -->
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet"> <!-- Lien vers les polices utilisées sur la page -->
+    <meta name="description" content=""> <!-- Description de la page pour les moteurs de recherche (SEO) -->
+    <link rel="stylesheet" href="./assets/style.css"> <!-- Lien vers la feuille de style CSS locale -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Lien vers la bibliothèque d'icônes Font Awesome -->
 </head>
 <body>
 <header>
-    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+    <h1>Sophie Bluel <span>Architecte d'intérieur</span></h1> <!-- Titre principal de la page -->
     <nav>
         <ul>
-            <li><a href="#portfolio">Projets</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a id="login_bold" href="login.html">Login</a></li>
-            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
+            <li><a href="#portfolio">Projets</a></li> <!-- Lien vers la section des projets -->
+            <li><a href="#contact">Contact</a></li> <!-- Lien vers la section de contact -->
+            <li><a id="login_bold" href="login.html">Login</a></li> <!-- Lien vers la page de connexion -->
+            <li><img src="./assets/icons/instagram.png" alt="Instagram"></li> <!-- Icône Instagram -->
         </ul>
     </nav>
 </header>
 <main>
     <section id="introduction">
         <figure>
-            <img src="./assets/images/sophie-bluel.png" alt="">
+            <img src="./assets/images/sophie-bluel.png" alt=""> <!-- Image de présentation -->
         </figure>
         <article>
-            <h2>Designer d'espace</h2>
-            <p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
+            <h2>Designer d'espace</h2> <!-- Sous-titre de la présentation -->
+            <p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p> <!-- Texte de présentation -->
             <p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
             <p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
         </article>
@@ -38,67 +38,67 @@
     <section id="portfolio">
         <!-- Barre noire -->
         <div id="edit-mode-bar" style="display: none;">
-            <p><i class="fa-solid fa-pen-to-square"></i>  Mode édition</p>
+            <p><i class="fa-solid fa-pen-to-square"></i>  Mode édition</p> <!-- Indication de mode édition -->
         </div>
         <div class="title-container">
-            <h2>Mes Projets</h2> 
-            <button id="edit-button" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> modifier</button>
+            <h2>Mes Projets</h2> <!-- Titre de la section des projets -->
+            <button id="edit-button" style="display: none;"><i class="fa-solid fa-pen-to-square"></i> modifier</button> <!-- Bouton pour entrer en mode édition -->
         </div>
         
         <!-- Modale -->
         <div id="edit-modal" class="modal">
             <div class="modal-content">
-                <span class="close">&times;</span>
+                <span class="close">&times;</span> <!-- Bouton pour fermer la modale -->
                 <div id="gallery-view">
-                    <h2>Galerie Photo</h2>
+                    <h2>Galerie Photo</h2> <!-- Titre de la galerie photo -->
                     <div class="modal-gallery-container">
                         <div class="modal-gallery"><!-- La galerie photo sera insérée ici via JS --></div>
                     </div>
-                    <button id="add-photo-button" class="add-photo-button">Ajouter une photo</button>
+                    <button id="add-photo-button" class="add-photo-button">Ajouter une photo</button> <!-- Bouton pour ajouter une photo -->
                 </div>
                 <div id="add-photo-view" style="display: none;">
-                    <i class="fa-solid fa-arrow-left" id="back-to-gallery"></i>
-                    <h2>Ajout photo</h2>
+                    <i class="fa-solid fa-arrow-left" id="back-to-gallery"></i> <!-- Bouton pour revenir à la galerie -->
+                    <h2>Ajout photo</h2> <!-- Titre de la section d'ajout de photo -->
                     
                     <div class="photo-upload-container" id="photo-upload-container">
-                        <i class="fa-regular fa-image"></i>
-                        <p id="police-color">+ Ajouter photo</p>
-                        <p>jpg, png : 4mo max.</p>
+                        <i class="fa-regular fa-image"></i> <!-- Icône d'ajout de photo -->
+                        <p id="police-color">+ Ajouter photo</p> <!-- Texte d'ajout de photo -->
+                        <p>jpg, png : 4mo max.</p> <!-- Restrictions sur le format et la taille des images -->
                     </div>
                     
                     <form id="add-photo-form">
-                        <input type="file" id="photo-file" name="photo-file" accept="image/*" style="display: none;" required>
+                        <input type="file" id="photo-file" name="photo-file" accept="image/*" style="display: none;" required> <!-- Champ pour sélectionner une image -->
                         <label class="title-font" for="photo-title">Titre</label>
-                        <input type="text" id="photo-title" name="photo-title" required>
+                        <input type="text" id="photo-title" name="photo-title" required> <!-- Champ pour le titre de la photo -->
                         
                         <label class="category-font" for="photo-category">Catégorie</label>
                         <select id="photo-category" name="photo-category" required>
                             <!-- Les catégories seront ajoutées ici via JS -->
                         </select>
 
-                        <button type="submit" class="submit-photo-button">Valider</button>
+                        <button type="submit" class="submit-photo-button">Valider</button> <!-- Bouton pour valider l'ajout de photo -->
                     </form>
                 </div>
             </div>
         </div>
 
         <!--filters-->
-        <div class="filters"><!--Dynamic display via JS--></div>
+        <div class="filters"><!--Dynamic display via JS--></div> <!-- Conteneur pour les filtres (affichés dynamiquement via JS) -->
         <!--filters-->
 
-        <div class="gallery"><!--Dynamic display via JS--></div>
+        <div class="gallery"><!--Dynamic display via JS--></div> <!-- Conteneur pour la galerie (affichée dynamiquement via JS) -->
     </section>
     <section id="contact">
-        <h2>Contact</h2>
-        <p>Vous avez un projet ? Discutons-en !</p>
+        <h2>Contact</h2> <!-- Titre de la section de contact -->
+        <p>Vous avez un projet ? Discutons-en !</p> <!-- Texte d'invitation à discuter d'un projet -->
         <form id="contact-form">
             <label for="name">Nom</label>
-            <input type="text" name="name" id="name">
+            <input type="text" name="name" id="name"> <!-- Champ pour le nom -->
             <label for="email">Email</label>
-            <input type="email" name="email" id="email">
+            <input type="email" name="email" id="email"> <!-- Champ pour l'email -->
             <label for="message">Message</label>
-            <textarea name="message" id="message" cols="30" rows="10"></textarea>
-            <input type="submit" value="Envoyer">
+            <textarea name="message" id="message" cols="30" rows="10"></textarea> <!-- Champ pour le message -->
+            <input type="submit" value="Envoyer"> <!-- Bouton pour envoyer le formulaire -->
         </form>
     </section>
 </main>
@@ -106,12 +106,12 @@
 <footer>
     <nav>
         <ul>
-            <li>Mentions Légales</li>
+            <li>Mentions Légales</li> <!-- Lien vers les mentions légales -->
         </ul>
     </nav>
 </footer>
-<script src="works.js"></script>
-<script src="login.js"></script>
-<script src="modale.js"></script>
+<script src="works.js"></script> <!-- Inclusion du fichier JavaScript works.js -->
+<script src="login.js"></script> <!-- Inclusion du fichier JavaScript login.js -->
+<script src="modale.js"></script> <!-- Inclusion du fichier JavaScript modale.js -->
 </body>
 </html>

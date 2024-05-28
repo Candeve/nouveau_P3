@@ -1,9 +1,9 @@
-const formLogin = document.querySelector("form");
+const formLogin = document.querySelector("form"); // Sélectionne le formulaire de connexion
 
 // Ajoute un écouteur d'événement pour le formulaire lors de sa soumission
-formLogin.addEventListener("submit", (e) => { 
+formLogin.addEventListener("submit", (e) => {
     e.preventDefault(); // Empêche le comportement par défaut du formulaire (rechargement de la page)
-    login();
+    login(); // Appelle la fonction login
 });
 
 async function login() {
@@ -11,6 +11,7 @@ async function login() {
     const emailLogin = document.getElementById("email").value;
     const passwordLogin = document.getElementById("password").value;
   
+    // Crée un objet utilisateur avec les données saisies
     const user = {
         email: emailLogin,
         password: passwordLogin,
@@ -24,7 +25,7 @@ async function login() {
                 "Accept": "application/json",
                 "Content-Type": "application/json",
             },
-            body: JSON.stringify(user),
+            body: JSON.stringify(user), // Convertit l'objet utilisateur en JSON
         });
 
         // Vérification de la réponse du serveur
@@ -38,7 +39,8 @@ async function login() {
             // Ajout du console.log pour vérifier le stockage du token
             console.log('Token stocké dans localStorage:', localStorage.getItem('token'));
 
-            document.location.href = "index.html"; // Redirection vers la page d'accueil
+            // Redirection vers la page d'accueil
+            document.location.href = "index.html";
 
         } else {
             // Si la réponse du serveur n'est pas réussie, affichage d'un message d'erreur
@@ -46,7 +48,7 @@ async function login() {
         }
     } catch (error) {
         console.error("Erreur lors de la connexion :", error);
-        // Gérez les erreurs de connexion ici
+        // Gère les erreurs de connexion ici
         document.querySelector(".error").innerHTML = "Erreur dans la connexion, veuillez réessayer ultérieurement";
     }
 }
