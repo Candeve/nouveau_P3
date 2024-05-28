@@ -20,18 +20,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const galleryView = document.getElementById("gallery-view");
     const addPhotoView = document.getElementById("add-photo-view");
 
-    if (localStorage.getItem('modalOpen') === 'true') {
-        modal.style.display = "block";
-        galleryView.style.display = "block";
-        addPhotoView.style.display = "none";
-        populateModalGallery();
-    }
-
     editButton.addEventListener("click", async (event) => {
         event.preventDefault();
         event.stopPropagation();
         modal.style.display = "block";
-        localStorage.setItem('modalOpen', 'true');
         galleryView.style.display = "block";
         addPhotoView.style.display = "none";
         await populateModalGallery();
@@ -42,7 +34,6 @@ document.addEventListener("DOMContentLoaded", () => {
         event.stopPropagation();
         resetPhotoUploadContainer();
         modal.style.display = "none";
-        localStorage.setItem('modalOpen', 'false');
     });
 
     window.addEventListener("click", (event) => {
@@ -51,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
             event.stopPropagation();
             resetPhotoUploadContainer();
             modal.style.display = "none";
-            localStorage.setItem('modalOpen', 'false');
         }
     });
 
@@ -189,7 +179,7 @@ async function populateModalGallery() {
             imageElement.src = project.imageUrl;
 
             const deleteIcon = document.createElement("i");
-            deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon"); // Updated icon class
+            deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
 
             deleteIcon.addEventListener("click", async (event) => {
                 event.preventDefault();
@@ -275,7 +265,7 @@ function addPhotoToGallery(work, gallerySelector) {
     imageElement.src = work.imageUrl;
 
     const deleteIcon = document.createElement("i");
-    deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon"); // Updated icon class
+    deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
 
     deleteIcon.addEventListener("click", async (event) => {
         event.preventDefault();

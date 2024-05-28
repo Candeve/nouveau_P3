@@ -219,7 +219,8 @@ nav ul li a {
     background-color: white;
     border: 1px solid #1D6154;
     color: #1D6154;
-    font-size: 16px;
+    font-size: 12px;
+    
     font-style: normal;
     font-weight: 700;
     font-family: 'Syne';
@@ -377,6 +378,9 @@ nav ul li a {
     border-radius: 10px;
     position: relative;
     bottom: 150px;
+    padding-left:30px
+
+
     
 }
 
@@ -385,6 +389,7 @@ nav ul li a {
     flex-direction: column;
     flex-grow: 1;
     overflow: hidden; /* Enlève la barre de défilement pour la première vue */
+
 }
 
 
@@ -466,22 +471,22 @@ nav ul li a {
 }
 
 .submit-photo-button {
-    margin-top: 20px;
-    background-color: #4CAF50;
+    display: block;
+    height: 50px;
+    font-family: 'Syne';
     color: white;
-    border: none;
-    border-radius: 5px;
+    background-color: #1D6154;
+    margin: 2em auto;
+    text-align: center;
+    border-radius: 60px;
     cursor: pointer;
-    font-size: 16px;
+    width: 45%;
 }
 
 #add-photo-form button{
     margin-top: 60px;
 }
 
-.submit-photo-button:hover {
-    background-color: #45a049;
-}
 
 #back-to-gallery {
     font-size: 24px;
@@ -489,9 +494,13 @@ nav ul li a {
     margin-bottom: 20px;
 }
 
-.modal-gallery-container {
-    flex-grow: 1;
-
+.modal-gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-content: stretch;
+    align-items: center;
+    justify-content: flex-start;
 }
 
 .photo-upload-container {
@@ -530,5 +539,31 @@ nav ul li a {
 }
 
 #police-color {
-color:#306685;
+    color:#306685;
+}
+
+
+#photo-title {
+    color: #333; /* Noir clair */
+    font-family: 'Work Sans', sans-serif;
+}
+
+.photo-category {
+    color: #333; /* Noir clair */
+    font-family: 'Work Sans', sans-serif;
+}
+
+
+.title-font {
+    font-family: 'Work Sans';
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.category-font {
+    font-family: 'Work Sans';
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
 }
