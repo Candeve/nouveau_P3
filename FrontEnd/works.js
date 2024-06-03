@@ -1,3 +1,5 @@
+let worksData = []; // Déclare une variable pour stocker les travaux
+
 // Récupère les données des travaux depuis l'API
 async function fetchData() {
     try {
@@ -9,6 +11,7 @@ async function fetchData() {
 
         const data = await response.json(); // Transforme la réponse en JSON
         console.log(data);
+        worksData = data; // Stocke les travaux dans la variable globale
         return data; // Retourne les données
 
     } catch (error) {
@@ -59,12 +62,13 @@ function createFilters(categoriesNames) {
 }
 
 // Gère les filtres
-async function manageFilters(works, categoriesNames) {
+async function manageFilters() {
     const displayAll = document.querySelector(".button_all_categories");
     displayAll.addEventListener("click", (event) => {
         event.preventDefault();
         event.stopPropagation();
-        createGallery(works); // Affiche tous les projets
+        createGallery(worksData); // Affiche tous les projets
+        setActiveButton(displayAll); // Définit le bouton actif
     });
 
     const divElementButtons = document.querySelector(".filters");
@@ -75,24 +79,30 @@ async function manageFilters(works, categoriesNames) {
             const categoryName = event.target.value.trim().toLowerCase();
             let choosenCategory;
             if (categoryName === "tous") {
-                choosenCategory = works; // Affiche tous les projets
+                choosenCategory = worksData; // Affiche tous les projets
             } else {
-                choosenCategory = works.filter(work => work.category.name.trim().toLowerCase() === categoryName); // Filtre les projets par catégorie
+                choosenCategory = worksData.filter(work => work.category.name.trim().toLowerCase() === categoryName); // Filtre les projets par catégorie
             }
             createGallery(choosenCategory); // Affiche les projets filtrés
+            setActiveButton(event.target); // Définit le bouton actif
         }
     });
 }
 
+// Définit le bouton actif
+function setActiveButton(button) {
+    const buttons = document.querySelectorAll('.button_categories, .button_all_categories');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    button.classList.add('active');
+}
+
 // Initialise la galerie
 async function initGallery() {
-    const worksData = await fetchData(); // Récupère les données des travaux
-    if (worksData) {
-        const categoriesNames = worksData.map(work => work.category.name); // Récupère les noms des catégories
-        createGallery(worksData); // Crée la galerie avec les travaux
-        createFilters(categoriesNames); // Crée les filtres
-        manageFilters(worksData, categoriesNames); // Gère les filtres
-    }
+    await fetchData(); // Récupère les données des travaux
+    const categoriesNames = worksData.map(work => work.category.name); // Récupère les noms des catégories
+    createGallery(worksData); // Crée la galerie avec les travaux
+    createFilters(categoriesNames); // Crée les filtres
+    manageFilters(); // Gère les filtres
 }
 
 // Appelle la fonction pour initialiser la galerie

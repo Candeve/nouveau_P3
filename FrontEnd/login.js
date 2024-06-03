@@ -10,13 +10,13 @@ async function login() {
     // Récupération de l'email et du mot de passe saisis par l'utilisateur
     const emailLogin = document.getElementById("email").value;
     const passwordLogin = document.getElementById("password").value;
-  
+
     // Crée un objet utilisateur avec les données saisies
     const user = {
         email: emailLogin,
         password: passwordLogin,
     };
-  
+
     try {
         // Tentative de connexion en envoyant les données utilisateur au serveur
         const response = await fetch("http://localhost:5678/api/users/login", {
@@ -35,7 +35,7 @@ async function login() {
 
             // Stockage du token dans le local storage du navigateur
             localStorage.setItem('token', userdata);
-            
+
             // Ajout du console.log pour vérifier le stockage du token
             console.log('Token stocké dans localStorage:', localStorage.getItem('token'));
 

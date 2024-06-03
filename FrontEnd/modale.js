@@ -20,9 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const galleryView = document.getElementById("gallery-view"); // Vue de la galerie
     const addPhotoView = document.getElementById("add-photo-view"); // Vue d'ajout de photo
 
-    editButton.addEventListener("click", async (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    editButton.addEventListener("click", async () => {
         modal.style.display = "block"; // Affiche la modale
         galleryView.style.display = "block"; // Affiche la vue de la galerie
         addPhotoView.style.display = "none"; // Cache la vue d'ajout de photo
@@ -30,26 +28,20 @@ document.addEventListener("DOMContentLoaded", () => {
         addSeparatorAfterImages(); // Ajoute des séparateurs après les images
     });
 
-    span.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    span.addEventListener("click", () => {
         resetPhotoUploadContainer(); // Réinitialise le conteneur d'ajout de photo
         modal.style.display = "none"; // Cache la modale
     });
 
     window.addEventListener("click", (event) => {
         if (event.target === modal) {
-            event.preventDefault();
-            event.stopPropagation();
             resetPhotoUploadContainer(); // Réinitialise le conteneur d'ajout de photo
             modal.style.display = "none"; // Cache la modale
         }
     });
 
     const addPhotoButton = document.getElementById("add-photo-button");
-    addPhotoButton.addEventListener("click", async (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    addPhotoButton.addEventListener("click", async () => {
         galleryView.style.display = "none"; // Cache la vue de la galerie
         addPhotoView.style.display = "block"; // Affiche la vue d'ajout de photo
         await populateCategoryOptions(); // Remplit les options de catégorie
@@ -57,9 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const backToGalleryButton = document.getElementById("back-to-gallery");
-    backToGalleryButton.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    backToGalleryButton.addEventListener("click", () => {
         resetPhotoUploadContainer(); // Réinitialise le conteneur d'ajout de photo
         galleryView.style.display = "block"; // Affiche la vue de la galerie
         addPhotoView.style.display = "none"; // Cache la vue d'ajout de photo
@@ -68,9 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const photoUploadContainer = document.getElementById("photo-upload-container");
     const photoFileInput = document.getElementById("photo-file");
 
-    photoUploadContainer.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
+    photoUploadContainer.addEventListener("click", () => {
         photoFileInput.click(); // Simule un clic sur le champ de fichier
     });
 
@@ -189,7 +177,7 @@ async function populateModalGallery() {
                 const success = await deleteWork(project.id); // Supprime le travail
                 if (success) {
                     figureElement.remove(); // Retire l'élément de la galerie modale
-                    removePhotoFromMainGallery(project.id); // Retire l'élément de la galerie principale
+                    updateGallery(); // Rafraîchir la galerie
                 }
             });
 
@@ -247,11 +235,15 @@ async function handleAddPhoto() {
         console.log(newWork);
 
         addPhotoToModalGallery(newWork); // Ajoute la photo à la galerie modale
-        addPhotoToMainGallery(newWork); // Ajoute la photo à la galerie principale
 
+        // Rafraîchir la galerie
+        updateGallery(); 
+
+        // Revenir à la vue principale de la modale
         document.getElementById("gallery-view").style.display = "block"; // Affiche la vue de la galerie
         document.getElementById("add-photo-view").style.display = "none"; // Cache la vue d'ajout de photo
         resetPhotoUploadContainer(); // Réinitialise le conteneur d'ajout de photo
+
     } catch (error) {
         console.error('Erreur pendant la requête d\'ajout :', error);
     }
@@ -275,40 +267,13 @@ function addPhotoToModalGallery(work) {
         const success = await deleteWork(work.id); // Supprime le travail
         if (success) {
             figureElement.remove(); // Retire l'élément de la galerie modale
-            removePhotoFromMainGallery(work.id); // Retire l'élément de la galerie principale
+            updateGallery(); // Rafraîchir la galerie
         }
     });
 
     figureElement.appendChild(imageElement);
     figureElement.appendChild(deleteIcon);
     modalGalleryElement.appendChild(figureElement);
-}
-
-function addPhotoToMainGallery(work) {
-    const mainGalleryElement = document.querySelector('.gallery'); // Sélectionne l'élément de la galerie principale
-    const figureElement = document.createElement("figure");
-    figureElement.dataset.id = work.id; // Définit l'ID du projet
-
-    const imageElement = document.createElement("img");
-    imageElement.src = work.imageUrl; // Définit la source de l'image
-
-    const titleElement = document.createElement("figcaption");
-    titleElement.textContent = work.title; // Définit le titre de la photo
-
-    figureElement.appendChild(imageElement);
-    figureElement.appendChild(titleElement);
-    mainGalleryElement.appendChild(figureElement);
-}
-
-function removePhotoFromMainGallery(id) {
-    const mainGallery = document.querySelector('.gallery'); // Sélectionne l'élément de la galerie principale
-    const figures = mainGallery.getElementsByTagName('figure'); // Récupère tous les éléments figure
-    for (let i = 0; i < figures.length; i++) {
-        if (figures[i].dataset.id === String(id)) { // Si l'ID correspond
-            figures[i].remove(); // Supprime l'élément
-            break;
-        }
-    }
 }
 
 function displaySelectedImage(event) {
@@ -346,7 +311,7 @@ function createSeparator(className) {
     return separator;
 }
 
-// Ajoute des barres de séparation après les images de la modale
+// Ajoute des barres de séparation après les images de la modale ( première vue )
 function addSeparatorAfterImages() {
     const modalGalleryElement = document.querySelector('.modal-gallery'); // Sélectionne l'élément de la galerie modale
     const existingSeparator = modalGalleryElement.parentNode.querySelector('.separator1');
@@ -356,12 +321,25 @@ function addSeparatorAfterImages() {
     }
 }
 
-// Ajoute des barres de séparation après la catégorie dans le formulaire
+// Ajoute des barres de séparation après la catégorie dans le formulaire ( deuxième vue )
 function addSeparatorAfterCategory() {
     const categorySelect = document.getElementById("photo-category"); // Sélectionne l'élément de sélection de catégorie
     const existingSeparator = categorySelect.parentNode.querySelector('.separator2');
     if (!existingSeparator) {
         const separator = createSeparator('separator2'); // Crée une nouvelle barre de séparation
         categorySelect.parentNode.insertBefore(separator, categorySelect.nextSibling); // Insère la barre de séparation après la sélection de catégorie
+    }
+}
+
+async function updateGallery() {
+    worksData = await fetchData('works'); // Récupère les travaux actualisés
+    createGallery(worksData); // Rafraîchit la galerie principale avec tous les travaux, y compris le nouveau
+
+    // Sélectionne le bouton de la catégorie active
+    const activeButton = document.querySelector('.button_categories.active');
+    if (activeButton) {
+        const categoryName = activeButton.value.trim().toLowerCase();
+        const choosenCategory = worksData.filter(work => work.category.name.trim().toLowerCase() === categoryName);
+        createGallery(choosenCategory); // Affiche les travaux de la catégorie active
     }
 }
