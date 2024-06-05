@@ -605,3 +605,8 @@ footer {
 .photo-upload-container p {
     color: #444444;
 }
+
+.submit-photo-button.disabled {
+    background-color: #ccc; /* Couleur de fond grisée */
+    cursor: not-allowed; /* Curseur interdit */
+}

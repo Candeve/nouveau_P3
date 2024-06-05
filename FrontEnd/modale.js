@@ -46,6 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         addPhotoView.style.display = "block"; // Affiche la vue d'ajout de photo
         await populateCategoryOptions(); // Remplit les options de catégorie
         addSeparatorAfterCategory(); // Ajoute des séparateurs après les catégories
+        validateForm(); // Appelle la fonction pour valider le formulaire initialement
     });
 
     const backToGalleryButton = document.getElementById("back-to-gallery");
@@ -64,6 +65,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     photoFileInput.addEventListener("change", (event) => {
         displaySelectedImage(event); // Affiche l'image sélectionnée
+        validateForm(); // Valide le formulaire
+    });
+
+    const photoTitleInput = document.getElementById("photo-title");
+    photoTitleInput.addEventListener("input", () => {
+        validateForm(); // Valide le formulaire
     });
 
     const addPhotoForm = document.getElementById("add-photo-form");
@@ -341,5 +348,19 @@ async function updateGallery() {
         const categoryName = activeButton.value.trim().toLowerCase();
         const choosenCategory = worksData.filter(work => work.category.name.trim().toLowerCase() === categoryName);
         createGallery(choosenCategory); // Affiche les travaux de la catégorie active
+    }
+}
+
+function validateForm() {
+    const title = document.getElementById("photo-title").value;
+    const fileInput = document.getElementById("photo-file").files.length;
+    const submitButton = document.querySelector(".submit-photo-button");
+
+    if (title && fileInput) {
+        submitButton.disabled = false;
+        submitButton.classList.remove("disabled");
+    } else {
+        submitButton.disabled = true;
+        submitButton.classList.add("disabled");
     }
 }
