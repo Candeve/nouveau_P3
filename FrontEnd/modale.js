@@ -5,13 +5,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem('token'); // Récupère le token depuis le local storage
     const editModeBar = document.getElementById("edit-mode-bar"); // Barre de mode édition
     const editButton = document.getElementById("edit-button"); // Bouton d'édition
+    const filtersAll = document.querySelector(".filters");
 
     if (token) {
         editModeBar.style.display = "block"; // Affiche la barre de mode édition si l'utilisateur est connecté
         editButton.style.display = "inline-block"; // Affiche le bouton d'édition si l'utilisateur est connecté
+        filtersAll.style.display = "none"
     } else {
         editModeBar.style.display = "none"; // Cache la barre de mode édition si l'utilisateur n'est pas connecté
         editButton.style.display = "none"; // Cache le bouton d'édition si l'utilisateur n'est pas connecté
+        
     }
 
     const modal = document.getElementById("edit-modal"); // Modale d'édition
